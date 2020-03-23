@@ -8,6 +8,7 @@ import org.springframework.boot.web.servlet.support.SpringBootServletInitializer
 @SpringBootApplication
 public class DeliveryAppApplication extends SpringBootServletInitializer {
 
+	//main method
 	public static void main(String[] args) {
 		// new JerseydemoApplication().configure(new
 		// SpringApplicationBuilder(JerseydemoApplication.class)).run(args);
