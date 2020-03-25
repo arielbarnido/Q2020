@@ -4,9 +4,12 @@ package com.delivery.app.service;
 import java.util.ArrayList;
 import java.util.List;
 
+import javax.validation.Valid;
+
 import org.springframework.stereotype.Service;
 
 import com.delivery.app.dto.Order;
+import com.delivery.app.dto.PlaceOrderDto;
 
 @Service
 public class OrderService {
@@ -26,6 +29,19 @@ public class OrderService {
 		orderList.add(order1);
 		orderList.add(order2);
 		return orderList;
+	}
+
+	//public Order placeOrder(final List<String> origin, final List<String> destination) {
+	public Order placeOrder(PlaceOrderDto placeOrderRequest) {
+		System.out.println("ORIGIN1:" + placeOrderRequest.getOrigin()[0].toString());
+		System.out.println("ORIGIN2:" + placeOrderRequest.getOrigin()[1].toString());
+		System.out.println("DESTINATION1:" + placeOrderRequest.getDestination()[0].toString());
+		System.out.println("DESTINATION2:" + placeOrderRequest.getDestination()[1].toString());
+		Order order = new Order();
+		order.setDistance(100);
+		order.setId(1);
+		order.setStatus("UNASSIGNED");
+		return order;
 	}
 
 }

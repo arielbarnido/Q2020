@@ -20,13 +20,16 @@ import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.springframework.test.context.junit4.SpringRunner;
 
+import com.github.tomakehurst.wiremock.core.Options;
 import com.github.tomakehurst.wiremock.junit.WireMockRule;
 
 @RunWith(SpringRunner.class)
 public class OrderEndpointTest {
 
+	private static final Integer PORT = 8082;
+	private static final String HOST_PORT = "http://localhost:8082";
 	@Rule
-	public WireMockRule wireMockRule = new WireMockRule(8081);
+	public WireMockRule wireMockRule = new WireMockRule(PORT);
 
 	@Test
 	public void tesOrderEndpointSuccess() throws ClientProtocolException, IOException {
@@ -34,7 +37,7 @@ public class OrderEndpointTest {
 				.willReturn(aResponse().withStatus(200).withHeader("Content-Type", "application/json")));
 
 		CloseableHttpClient client = HttpClients.createDefault();
-		HttpGet get = new HttpGet("http://localhost:8081/api/orders?page=1&limit=2");
+		HttpGet get = new HttpGet(HOST_PORT + "/api/orders?page=1&limit=2");
 		HttpResponse httpResponse = client.execute(get);
 		assertEquals(200, httpResponse.getStatusLine().getStatusCode());
 
@@ -46,21 +49,21 @@ public class OrderEndpointTest {
 				.willReturn(aResponse().withStatus(200).withHeader("Content-Type", "application/json")));
 
 		CloseableHttpClient client = HttpClients.createDefault();
-		HttpGet get = new HttpGet("http://localhost:8081/api/orders?page=1&limit=2");
+		HttpGet get = new HttpGet(HOST_PORT + "/api/orders?page=1&limit=2");
 		HttpResponse httpResponse = client.execute(get);
 		assertEquals(404, httpResponse.getStatusLine().getStatusCode());
 
 	}
-	
+
 	@Test
 	public void tesOrderEndpoint400Fail() throws ClientProtocolException, IOException {
-		wireMockRule.stubFor(get(urlEqualTo("/api/orders?page=1&limit=2"))
-				.willReturn(aResponse().withStatus(200).withHeader("Content-Type", "application/json")));
+		wireMockRule.stubFor(get(urlEqualTo("/api/orders?page=0&limit=2"))
+				.willReturn(aResponse().withStatus(400).withHeader("Content-Type", "application/json")));
 
 		CloseableHttpClient client = HttpClients.createDefault();
-		HttpGet get = new HttpGet("http://localhost:8081/api/orders?page=1&limit=2");
+		HttpGet get = new HttpGet(HOST_PORT + "/api/orders?page=0&limit=2");
 		HttpResponse httpResponse = client.execute(get);
-		//assertEquals(400, httpResponse.getStatusLine().getStatusCode());
+		assertEquals(400, httpResponse.getStatusLine().getStatusCode());
 
 	}
 
