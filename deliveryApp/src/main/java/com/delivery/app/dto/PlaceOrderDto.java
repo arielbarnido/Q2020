@@ -1,8 +1,9 @@
 package com.delivery.app.dto;
 
 import javax.validation.constraints.Size;
+import javax.xml.bind.annotation.XmlRootElement;
 
-//@XmlRootElement
+@XmlRootElement
 public class PlaceOrderDto {
 
 	@Size(min=2, max=2, message="Origin coordinates must be exactly two items.")

@@ -11,7 +11,6 @@ import javax.ws.rs.core.Response;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
-import org.springframework.validation.annotation.Validated;
 
 import com.delivery.app.constraint.ValidPageNumber;
 import com.delivery.app.dto.PlaceOrderDto;
@@ -19,19 +18,17 @@ import com.delivery.app.service.OrderService;
 
 @Component
 @Path("orders")
-@Validated
+// @Validated
 public class OrderEndpoint {
 
 	@Autowired
 	private OrderService orderService;
 
 	@GET
-	
+
 	@Produces("application/json")
-	public Response listOrders(
-			@QueryParam("page") @ValidPageNumber Integer page,
-			@QueryParam("limit") Integer limit) {
-		
+	public Response listOrders(@QueryParam("page") @ValidPageNumber Integer page, @QueryParam("limit") Integer limit) {
+
 		return Response.ok(orderService.getOrders(page, limit)).build();
 	}
 
@@ -39,7 +36,6 @@ public class OrderEndpoint {
 	@Consumes("application/json")
 	@Produces("application/json")
 	public Response placeOrder(final @Valid PlaceOrderDto placeOrderRequest) {
-		System.out.println("TESTTER POST");
 		return Response.ok(orderService.placeOrder(placeOrderRequest)).build();
 	}
 

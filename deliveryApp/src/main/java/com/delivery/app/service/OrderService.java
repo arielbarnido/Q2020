@@ -4,8 +4,6 @@ package com.delivery.app.service;
 import java.util.ArrayList;
 import java.util.List;
 
-import javax.validation.Valid;
-
 import org.springframework.stereotype.Service;
 
 import com.delivery.app.dto.Order;
@@ -31,7 +29,6 @@ public class OrderService {
 		return orderList;
 	}
 
-	//public Order placeOrder(final List<String> origin, final List<String> destination) {
 	public Order placeOrder(PlaceOrderDto placeOrderRequest) {
 		System.out.println("ORIGIN1:" + placeOrderRequest.getOrigin()[0].toString());
 		System.out.println("ORIGIN2:" + placeOrderRequest.getOrigin()[1].toString());

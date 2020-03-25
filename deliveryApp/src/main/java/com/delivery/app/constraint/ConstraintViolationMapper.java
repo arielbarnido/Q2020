@@ -11,12 +11,12 @@ import javax.ws.rs.ext.ExceptionMapper;
 import javax.ws.rs.ext.Provider;
 
 @Provider
-public class ConstraintViolationMapper implements ExceptionMapper<ConstraintViolationException>{
+public class ConstraintViolationMapper implements ExceptionMapper<ConstraintViolationException> {
 
 	@Override
 	public Response toResponse(ConstraintViolationException arg0) {
-		List<String> messages = arg0.getConstraintViolations().stream().map(ConstraintViolation::getMessage).collect(Collectors.toList());
-		System.out.println("IN USTOM MAPPER");
+		List<String> messages = arg0.getConstraintViolations().stream()
+				.map(ConstraintViolation::getMessage).collect(Collectors.toList());
 		return Response.status(Status.BAD_REQUEST).entity(messages).build();
 	}
 

@@ -9,8 +9,6 @@ public class ValidPageNumberValidator implements ConstraintValidator<ValidPageNu
 
 	@Override
 	public boolean isValid(Integer page, ConstraintValidatorContext arg1) {
-		System.out.println("VAL:");
-		System.out.println(page);
 		return page > 0;
 	}
 
