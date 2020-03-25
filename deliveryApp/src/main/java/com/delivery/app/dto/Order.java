@@ -7,11 +7,11 @@ import javax.persistence.Id;
 
 @Entity
 public class Order {
-
+	
 	@Id
 	@GeneratedValue(strategy=GenerationType.AUTO)
 	private Integer id;
-	private Integer distance;
+	private String distance;
 	private String status;
 	public Integer getId() {
 		return id;
@@ -19,10 +19,10 @@ public class Order {
 	public void setId(Integer id) {
 		this.id = id;
 	}
-	public Integer getDistance() {
+	public String getDistance() {
 		return distance;
 	}
-	public void setDistance(Integer distance) {
+	public void setDistance(String distance) {
 		this.distance = distance;
 	}
 	public String getStatus() {

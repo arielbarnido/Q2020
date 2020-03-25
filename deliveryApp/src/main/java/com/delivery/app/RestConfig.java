@@ -15,15 +15,4 @@ public class RestConfig extends ResourceConfig {
 		register(OrderEndpoint.class);
 	}
 
-	//@PostConstruct
-	//public void setup() {
-		//register(OrderService.class);
-		//register(OrderEndpoint.class);
-		
-	//}
-	
-	
-    
-
-
 }

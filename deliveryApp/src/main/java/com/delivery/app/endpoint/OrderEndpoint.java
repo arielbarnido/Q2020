@@ -1,5 +1,7 @@
 package com.delivery.app.endpoint;
 
+import java.net.URISyntaxException;
+
 import javax.validation.Valid;
 import javax.ws.rs.Consumes;
 import javax.ws.rs.GET;
@@ -18,24 +20,21 @@ import com.delivery.app.service.OrderService;
 
 @Component
 @Path("orders")
-// @Validated
 public class OrderEndpoint {
 
 	@Autowired
 	private OrderService orderService;
 
 	@GET
-
 	@Produces("application/json")
 	public Response listOrders(@QueryParam("page") @ValidPageNumber Integer page, @QueryParam("limit") Integer limit) {
-
 		return Response.ok(orderService.getOrders(page, limit)).build();
 	}
 
 	@POST
 	@Consumes("application/json")
 	@Produces("application/json")
-	public Response placeOrder(final @Valid PlaceOrderDto placeOrderRequest) {
+	public Response placeOrder(final @Valid PlaceOrderDto placeOrderRequest) throws URISyntaxException {
 		return Response.ok(orderService.placeOrder(placeOrderRequest)).build();
 	}
 

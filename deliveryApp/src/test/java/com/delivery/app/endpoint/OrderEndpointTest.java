@@ -20,7 +20,6 @@ import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.springframework.test.context.junit4.SpringRunner;
 
-import com.github.tomakehurst.wiremock.core.Options;
 import com.github.tomakehurst.wiremock.junit.WireMockRule;
 
 @RunWith(SpringRunner.class)
