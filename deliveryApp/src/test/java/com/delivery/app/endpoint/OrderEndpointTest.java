@@ -66,16 +66,4 @@ public class OrderEndpointTest {
 
 	}
 
-	private String convertHttpResponseToString(HttpResponse httpResponse) throws IOException {
-		InputStream inputStream = httpResponse.getEntity().getContent();
-		return convertInputStreamToString(inputStream);
-	}
-
-	private String convertInputStreamToString(InputStream inputStream) {
-		Scanner scanner = new Scanner(inputStream, "UTF-8");
-		String string = scanner.useDelimiter("\\Z").next();
-		scanner.close();
-		return string;
-	}
-
 }

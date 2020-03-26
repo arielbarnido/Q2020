@@ -1,6 +1,5 @@
 package com.delivery.app.service;
 
-//import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertTrue;
 
 import org.junit.jupiter.api.BeforeEach;
@@ -12,16 +11,16 @@ import org.springframework.test.context.junit4.SpringRunner;
 public class OrderServiceTest {
 
 	OrderService orderService;
-	
+
 	@BeforeEach
-	public void setup(){
+	public void setup() {
 		orderService = new OrderService();
 	}
-	
+
 	@Test
-	public void  testAutowires(){
+	public void testAutowires() {
 		orderService = new OrderService();
 		assertTrue(orderService != null);
 	}
-	
+
 }
