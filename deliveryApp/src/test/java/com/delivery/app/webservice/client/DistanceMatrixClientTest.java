@@ -2,6 +2,8 @@ package com.delivery.app.webservice.client;
 
 import static org.junit.Assert.assertEquals;
 
+import java.io.UnsupportedEncodingException;
+import java.net.URLEncoder;
 import java.util.Arrays;
 
 import org.junit.Test;
@@ -65,10 +67,10 @@ public class DistanceMatrixClientTest {
 	}
 	
 	@Test
-	public void testBuildFullUri(){
+	public void testBuildFullUri() throws UnsupportedEncodingException{
 		String[] start = {"a","b","c"};
 		String[] end = {"x","y","z"};
-		String expected = client.BASE_URL + "?origins=a|b|c&destinations=x|y|z&key=" + client.API_KEY;
+		String expected = client.BASE_URL + "?" + URLEncoder.encode("origins=a|b|c&destinations=x|y|z&key=" + client.API_KEY, "UTF-8");
 		print(expected, "EXPECTED URI");
 		String fullUri = client.buildFullUri(start, end);
 		print(fullUri,"ACTUAL   URI");

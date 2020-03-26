@@ -1,7 +1,9 @@
 package com.delivery.app.webservice.client;
 
+import java.io.UnsupportedEncodingException;
 import java.net.URI;
 import java.net.URISyntaxException;
+import java.net.URLEncoder;
 import java.util.Arrays;
 import java.util.Collections;
 import java.util.List;
@@ -24,21 +26,24 @@ public class DistanceMatrixClient {
 	@Autowired
 	RestTemplate restTemplate;
 
-	protected final String BASE_URL = "https://maps.googleapis.com/maps/api/distancematrix/json";
+	@Value("${distance.matrix.base.uri}")
+	protected String BASE_URL;
+	//= "https://maps.googleapis.com/maps/api/distancematrix/json";
 
-	public String getDistanceBetweenTwoPoints(String[] start, String[] end) throws URISyntaxException {
-		URI uri = new URI(buildFullUri(start,end));
+	public String getDistanceBetweenTwoPoints(String[] start, String[] end)
+			throws URISyntaxException, UnsupportedEncodingException {
+		URI uri = new URI(buildFullUri(start, end));
 		DistanceMatrix distanceMatrix = restTemplate.getForObject(uri, DistanceMatrix.class);
 		System.out.println(distanceMatrix.getStatus());
-		
+		System.out.println(String.format("%s:%d","rows size:",distanceMatrix.getRows().size()));
 		return "1 735 km";
 	}
-	
-	//BASE_URL + "?" + "origins=" + buildParams(Arrays.asList(start)) + "&" + "destination=" + buildParams(Arrays.asList(end)) + "&key=" + API_KEY
-	
 
-	public String buildFullUri(String[] start, String[] end) {
-		return BASE_URL + "?" + "origins=" + buildParams(Arrays.asList(start)) + "&" + "destinations=" + buildParams(Arrays.asList(end)) + "&key=" + API_KEY;
+	public String buildFullUri(String[] start, String[] end) throws UnsupportedEncodingException {
+		String encodedUrl = URLEncoder.encode("origins=" + buildParams(Arrays.asList(start)) + "&" + "destinations="
+				+ buildParams(Arrays.asList(end)) + "&key=" + API_KEY, "UTF-8");
+		System.out.println("URL: " + encodedUrl);
+		return BASE_URL + "?" + encodedUrl;
 	}
 
 	public String buildParams(List<String> coordinates) {
