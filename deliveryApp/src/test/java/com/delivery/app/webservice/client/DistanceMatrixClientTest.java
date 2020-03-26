@@ -70,7 +70,7 @@ public class DistanceMatrixClientTest {
 		String[] start = { "a", "b", "c" };
 		String[] end = { "x", "y", "z" };
 		String expected = client.BASE_URL + "?"
-				+ URLEncoder.encode("origins=a|b|c&destinations=x|y|z&key=" + client.API_KEY, "UTF-8");
+				+ URLEncoder.encode("units=metric&" + "origins=a|b|c&destinations=x|y|z&key=" + client.API_KEY, "UTF-8");
 		print(expected, "EXPECTED URI");
 		String fullUri = client.buildFullUri(start, end);
 		print(fullUri, "ACTUAL   URI");

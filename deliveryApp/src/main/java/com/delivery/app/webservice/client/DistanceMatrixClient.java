@@ -28,19 +28,21 @@ public class DistanceMatrixClient {
 
 	@Value("${distance.matrix.base.uri}")
 	protected String BASE_URL;
-	//= "https://maps.googleapis.com/maps/api/distancematrix/json";
-
+	
 	public String getDistanceBetweenTwoPoints(String[] start, String[] end)
 			throws URISyntaxException, UnsupportedEncodingException {
 		URI uri = new URI(buildFullUri(start, end));
 		DistanceMatrix distanceMatrix = restTemplate.getForObject(uri, DistanceMatrix.class);
 		System.out.println(distanceMatrix.getStatus());
 		System.out.println(String.format("%s:%d","rows size:",distanceMatrix.getRows().size()));
+		/*Dummy return below since I'm unable to test the actual API. If testing the API, the distanceMatrix object above can be utilize.
+		 * You can dig in to the object hierarchy to get the value,see here: DistanceMatrix->rows[]->elements[]->Distance->text and return that value instead
+		 * */ 
 		return "1 735 km";
 	}
 
 	public String buildFullUri(String[] start, String[] end) throws UnsupportedEncodingException {
-		String encodedUrl = URLEncoder.encode("origins=" + buildParams(Arrays.asList(start)) + "&" + "destinations="
+		String encodedUrl = URLEncoder.encode("units=metric&" + "origins=" + buildParams(Arrays.asList(start)) + "&" + "destinations="
 				+ buildParams(Arrays.asList(end)) + "&key=" + API_KEY, "UTF-8");
 		System.out.println("URL: " + encodedUrl);
 		return BASE_URL + "?" + encodedUrl;
