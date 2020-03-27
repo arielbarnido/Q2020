@@ -13,6 +13,7 @@ import com.delivery.app.dao.OrderRepository;
 import com.delivery.app.dto.Order;
 import com.delivery.app.dto.PlaceOrderDto;
 import com.delivery.app.webservice.client.DistanceMatrixClient;
+import com.delivery.app.webservice.client.DogClient;
 
 @Service
 public class OrderService {
@@ -24,6 +25,9 @@ public class OrderService {
 
 	@Autowired
 	private DistanceMatrixClient distanceMatrixClient;
+	
+	@Autowired
+	DogClient dogClient;
 
 	public List<Order> getOrders(Integer page, Integer limit) {
 		Pageable pagedOrders = PageRequest.of(page - 1, limit);
